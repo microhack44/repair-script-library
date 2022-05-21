@@ -25,6 +25,11 @@
 		"description" : "Runs chkdsk to fix file system corruption"
 	},
 	{
+		"id" : "win-GA-filesregfixer",
+		"path" : "src/windows/GA_offlinefixer_damunozl.ps1",
+		"description" : "Fixes the integrity of Guest Agent files and registry"
+	},
+	{
 		"id" : "win-sfc-sf-corruption",
 		"path" : "src/windows/win-sfc-sf-corruption.ps1",
 		"description" : "Runs sfc to fix system file corruption"
