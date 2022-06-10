@@ -12,29 +12,18 @@ $host.UI.RawUI.WindowTitle = $Title
 $diska='c'
 
 # FINDER FOR FAULTY OS DRIVE
-if (Test-Path -Path 'l:\Windows') {
-  $diskb='l'
-} else {
-if (Test-Path -Path 'i:\Windows') {
-  $diskb='i'
-} else {
-if (Test-Path -Path 'g:\Windows') {
-  $diskb='g'
-} else {
-if (Test-Path -Path 'j:\Windows') {
-  $diskb='j'
-} else {
-if (Test-Path -Path 'k:\Windows') {
-  $diskb='k'
-} else {
-if (Test-Path -Path 'f:\Windows') {
-  $diskb='f'
-} else {
-if (Test-Path -Path 'h:\Windows') {
-  $diskb='h'
-} else {	
-"Path doesn't exist."
-}}}}}}}
+$diskarray = "d","q","w","e","r","t","y","u","i","o","p","s","f","g","h","j","k","l","z","x","v","n","m"
+$diskb="000"
+foreach ($diskt in $diskarray)
+{
+   if (Test-Path -Path "$($diskt):\Windows")
+   {
+    $diskb=$diskt
+    } 
+}
+
+# IN CASE OF FINDER FAILURE
+if ($diskb -eq "000") {write-output "No OS disk attached detected, no changes performed from script";start-sleep 7;Exit}
 
 # HIVE LOADER
 # A Backup of the BROKENSYSTEM was taken and left on $($diskb):\ as regbackupbeforeGAchanges just in case!
@@ -85,3 +74,5 @@ del "$($diskb):\rdagent.reg" -force
 del "$($diskb):\waga.reg" -force
 del "$($diskb):\wats.reg" -force
 
+write-output "   --------------   SCRIPT FINISHED PROPERLY, BACKUP OF PREVIOUS GA IS IN ROOT AS WindowsazurefaultyGAbackup folder and registry backup as regbackupbeforeGAchanges   --------------   "
+start-sleep 10
